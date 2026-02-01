@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const overlay   = document.getElementById("overlay");
   const logArea   = document.getElementById("logArea");
   const inputLine = document.getElementById("inputLine");
-  const typed     = document.getElementById("typed");
+  const nameInput = document.getElementById("nameInput");
   const hint      = document.getElementById("hint");
 
   if(!overlay) return;
@@ -54,12 +54,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   let logIndex = 0;
   let charIndex = 0;
-  let name = "";
 
   function typeLog(){
     if(logIndex >= logs.length){
       inputLine.classList.remove("hidden");
       hint.classList.remove("hidden");
+
+      // 🔥 mobile: auto focus mở bàn phím
+      setTimeout(()=> nameInput.focus(), 200);
       return;
     }
 
@@ -83,7 +85,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
   }
 
-  const savedName = getSavedName();
+  const savedName = getSavedName?.();
 
   if(savedName){
     overlay.classList.add("exit");
@@ -93,33 +95,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
     typeLog();
   }
 
-  document.addEventListener("keydown", e=>{
-    if(inputLine.classList.contains("hidden")) return;
-    if(overlay.classList.contains("exit")) return;
+  /* ===========================
+     XỬ LÝ INPUT THẬT
+  ============================ */
+  nameInput.addEventListener("keydown", e=>{
+    if(e.key !== "Enter") return;
 
-    if(e.key === "Enter"){
-      if(!name.trim()) return;
+    const name = nameInput.value.trim();
+    if(!name) return;
 
-      localStorage.setItem(NAME_KEY, name.trim());
-      localStorage.setItem(TIME_KEY, Date.now());
+    localStorage.setItem(NAME_KEY, name);
+    localStorage.setItem(TIME_KEY, Date.now());
 
-      window.dispatchEvent(new Event("username-ready"));
+    window.dispatchEvent(new Event("username-ready"));
 
-      overlay.classList.add("exit");
-      setTimeout(()=> overlay.remove(),800);
-      return;
-    }
-
-    if(e.key === "Backspace"){
-      name = name.slice(0,-1);
-      typed.textContent = name;
-      return;
-    }
-
-    if(e.key.length === 1){
-      name += e.key;
-      typed.textContent = name;
-    }
+    overlay.classList.add("exit");
+    nameInput.blur();
+    setTimeout(()=> overlay.remove(),800);
   });
 
 });

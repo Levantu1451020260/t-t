@@ -316,21 +316,33 @@ button:hover{
 }
 
 .fake-input{
-    max-width:260px;          /* GIỚI HẠN ĐỘ RỘNG */
-    display:inline-flex;
-    overflow:hidden;
-    white-space:nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
-#typed{
-    display:inline-block;
-    max-width:100%;
-    overflow:hidden;
-    text-overflow:clip;
-    vertical-align:bottom;
-    font-family: 'VT323', monospace;
-    font-size: 24px;
-    margin: 0 0 0 5px;
+/* input kiểu terminal */
+#nameInput{
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffcc66;
+  font-size: 18px;
+  font-family: "Courier New", monospace;
+  caret-color: #ffcc66;
+}
+
+/* placeholder mờ */
+#nameInput::placeholder{
+  color: rgba(255,204,102,.45);
+}
+
+/* mobile fix */
+#nameInput{
+  -webkit-appearance: none;
 }
 
 .hint{
