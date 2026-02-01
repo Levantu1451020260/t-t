@@ -106,8 +106,19 @@
         <br>
 
         <div class="line fake-input hidden" id="inputLine">
-            &gt; NHẬP TÊN: <span id="typed"></span><span class="cursor">█</span>
+            &gt; NHẬP TÊN:
+            <span id="typed"></span><span class="cursor">█</span>
+
+            <!-- input ẩn để mobile mở bàn phím -->
+            <input 
+                type="text"
+                id="nameInput"
+                autocomplete="off"
+                autocapitalize="words"
+                inputmode="text"
+            >
         </div>
+
 
         <div class="hint hidden" id="hint">↵ ENTER ĐỂ BƯỚC VÀO NĂM MỚI</div>
     </div>
