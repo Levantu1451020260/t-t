@@ -700,8 +700,19 @@ button:hover{
 
 #nameInput{
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  height: 0;
-  width: 0;
+  left: 0;
+  top: 0;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0.01; /* đừng = 0 */
+  background: transparent;
+  color: transparent;
+  border: none;
+  outline: none;
+
+  caret-color: transparent;
+
+  transform: scale(0.01);
 }
